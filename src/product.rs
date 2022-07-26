@@ -13,7 +13,7 @@ pub struct Product {
     pub product_id: String,
     pub product_name: String,
     pub stock_quantity: u8,
-    pub price: f32,
+    pub price: u32,
 }
 
 impl Product{

@@ -1,0 +1,16 @@
+// creating subaccount
+near create-account inventory.bratipah.testnet --masterAccount bratipah.testnet --initialBalance 30 
+
+// deploying the smart contract to the testnet
+near deploy --wasmFile target/wasm32-unknown-unknown/release/hardware_inventory.wasm --accountId inventory.bratipah.testnet
+
+
+// call functions
+near call inventory.bratipah.testnet new --accountId=bratipah.testnet
+near call inventory.bratipah.testnet new_order '{"order":{"order_id":"one", "order_details":"first detail", "customer_name":"first customer_name", "quantity":1, "order_date":1, "product_id":"product one"}}' --accountId=inventory.bratipah.testnet
+near call inventory.bratipah.testnet update_stock '{"product":{"product_id":"1", "product_name":"first", "stock_quantity":8, "price":10}}' --accountId=inventory.bratipah.testnet
+
+// viewing functions
+near view inventory.bratipah.testnet get_order '{"id":"one"}'
+near view inventory.bratipah.testnet get_product '{"id":"1"}'
+near view inventory.bratipah.testnet check_stock '{"id":"1"}'
